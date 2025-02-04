@@ -1,0 +1,30 @@
+﻿@using MoneyKeeper.Models.Enum
+@model MoneyKeeper.Models.Money
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/money.css" type="text/css" />
+}
+@{
+    var userStatus = Enum.GetValues(typeof(MoneyCategory));
+}
+<div class="container">
+    <div>
+        <div>
+            <h1>Create money</h1>
+        </div>
+        <div>
+            @using (Html.BeginForm("CreateMoney", "Main", FormMethod.Post))
+            {
+                <input type="text" asp-for="Price" placeholder="input your money" />
+                @Html.DropDownListFor(model => model.MoneyCategory, Enum.GetValues(typeof(MoneyKeeper.Models.Enum.MoneyCategory)).Cast<MoneyKeeper.Models.Enum.MoneyCategory>().Select(e => new SelectListItem
+                   {
+                       Text = e.ToString(),
+                       Value = e.ToString()
+                   }),
+                "--Coise Money Category--",
+                new { @class = "form-control m-1 w-25" })
+                <button type="submit" class="btn btn-primary">Submit</button>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+﻿@model MoneyKeeper.Models.Money
+<h1>Edit Money</h1>
+
+
+
+@using (Html.BeginForm("EditMoney", "Main", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.Id)
+    @Html.TextBoxFor(model => model.Price, new { @class = "form-control" })
+    @Html.DropDownListFor(model => model.MoneyCategory, Enum.GetValues(typeof(MoneyKeeper.Models.Enum.MoneyCategory)).Cast<MoneyKeeper.Models.Enum.MoneyCategory>().Select(e => new SelectListItem
+{
+    Text = e.ToString(),
+    Value = e.ToString()
+}), new { @class = "form-control" })
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+
